@@ -54,7 +54,7 @@ public class BallManager implements SensorEventListener {
     private double yVelocity = 0;
 
     // Factor to multiply the acceleration of the ball by
-    private static final float FACTOR_ACCELERATION = 0.005f;
+    public static final float FACTOR_ACCELERATION = 0.005f;
 
     // The ball view is not fully loaded yet
     private boolean ballViewLoaded = false;
