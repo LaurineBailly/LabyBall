@@ -9,4 +9,5 @@
     <color name="textOnLight">#000000</color>
     <color name="textOnDark">#FFFFFF</color>
     <color name="borders">#000000</color>
+    <color name="mainActivityBackground">#000000</color>
 </resources>
