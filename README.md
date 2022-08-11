@@ -1,5 +1,5 @@
 # TP3
-## LabyrinthBall
+## LabyBall
 
 ---
 
@@ -10,4 +10,4 @@ A ball that browses in a labyrinth thanks to the phone accelerometer. The user h
 - **TP3.4:** The user has to make the ball browse from a point A to a point B. 
 - **TP3.5:** The user is advertised when winning the game and another labyrinth is loaded. 
 
-![MVC architecture](https://github.com/LaurineBailly/LabyBall/blob/dev/MVC_architecture.jpg?raw=true)
+![MVC architecture](https://github.com/LaurineBailly/LabyBall/blob/dev/UMLLabyBall.jpg?raw=false)
