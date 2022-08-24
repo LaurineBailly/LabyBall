@@ -2,19 +2,23 @@ package com.example.labyball;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+
 import com.example.labyball.controller.BallManager;
 import com.example.labyball.controller.LabyrinthManager;
-import com.example.labyball.modele.Bean.Hurdle;
+import com.example.labyball.modele.bean.ScreenArea;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LabyrinthManager.LabyrinthListener {
 
     // Manager of the ball position
     private BallManager ballController;
+    // True is the labyrinth is already loaded
+    private boolean labyrinthLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,16 +26,14 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
 
-        ViewGroup rootMainActivity = findViewById(R.id.main_frame_layout);
+        FrameLayout rootMainActivity = findViewById(R.id.main_frame_layout);
 
-        LabyrinthManager labyController = new LabyrinthManager(this, rootMainActivity);
+        new LabyrinthManager(this, rootMainActivity, this);
 
-        ArrayList<Hurdle> labyHurdles = labyController.getLabyrinthHurdles();
-
-        try{
-            ballController = new BallManager(this, rootMainActivity, labyHurdles);
+        try {
+            ballController = new BallManager(this, rootMainActivity);
         }
-        catch(UnsupportedOperationException e){
+        catch(UnsupportedOperationException e) {
             e.printStackTrace();
 
             // A window pops up displaying the error and invites the user to close the application.
@@ -51,8 +53,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         ballController.stopUpdatingBall();
+    }
+
+    @Override
+    public void onLabyrinthLoaded(int pathWidth, ArrayList<ScreenArea> labyrinthScreenAreas) {
+        if(!labyrinthLoaded) {
+            ballController.setBallManagerSettings(labyrinthScreenAreas, pathWidth);
+            labyrinthLoaded = true;
+        }
     }
 }

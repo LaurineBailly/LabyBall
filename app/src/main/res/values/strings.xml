@@ -2,4 +2,5 @@
     <string name="app_name">LabyBall</string>
     <string name="tv_title_x">X (mm)</string>
     <string name="tv_title_y">Y (mm)</string>
+    <string name="labyrinthGettingReady">Please wait while the labyrinth is getting ready...</string>
 </resources>

@@ -28,6 +28,8 @@ public class BallView extends View {
     // X and Y position in pixels, initialized for a ball at the left top of the screen.
     private double posTop = 0;
     private double posLeft = 0;
+    // Ball diameter
+    private int ballDiameter = 60;
 
     public BallView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -36,6 +38,7 @@ public class BallView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         ballPicture = BitmapFactory.decodeResource(getResources(), R.drawable.bille);
+        ballPicture = Bitmap.createScaledBitmap(ballPicture, ballDiameter, ballDiameter, true);
     }
 
     @Override
@@ -64,7 +67,7 @@ public class BallView extends View {
         return posLeft;
     }
 
-    public int getBallDiameter() {
-        return ballPicture.getWidth();
+    public void setBallDiameter(int ballDiameter) {
+        this.ballDiameter = ballDiameter;
     }
 }

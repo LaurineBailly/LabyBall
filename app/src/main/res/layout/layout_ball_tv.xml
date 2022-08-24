@@ -1,72 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <view
         android:id="@+id/id_ballView"
         class="com.example.labyball.view.BallView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
-    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="8dp"
-        android:elevation="2dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_title"
-                android:padding="8dp"
-                android:text="@string/tv_title_x"
-                android:textColor="@color/textOnDark" />
-
-            <TextView
-                android:id="@+id/id_tvXValue"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_value"
-                android:padding="8dp"
-                android:textColor="@color/textOnLight" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_title"
-                android:padding="8dp"
-                android:text="@string/tv_title_y"
-                android:textColor="@color/textOnDark" />
-
-            <TextView
-                android:id="@+id/id_tvYValue"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_value"
-                android:padding="8dp"
-                android:textColor="@color/textOnLight" />
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_weight="1"
+        android:visibility="invisible" />
 
 </FrameLayout>
