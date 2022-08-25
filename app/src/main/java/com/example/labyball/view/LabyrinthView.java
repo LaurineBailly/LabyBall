@@ -1,3 +1,9 @@
+/*
+ * Class name    : LabyrinthView
+ *
+ * Description   : draws the labyrinth
+ */
+
 package com.example.labyball.view;
 
 import android.content.Context;
@@ -10,30 +16,27 @@ import androidx.annotation.Nullable;
 import com.example.labyball.R;
 import java.util.ArrayList;
 
-/**
- * Class name    : LabyrinthView
- *
- * Description   : draws the labyrinth
- *
- * @version 1.0
- *
- * @author Laurine Bailly
- */
 public class LabyrinthView extends View {
 
     // Stroke of the brick in dip
     public static final int STROKE_WIDTH = 2;
+
     // Pencil for the filling of the brick
     private final Paint brickPainter = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     // Pencil for the brick stroke
     private final Paint brickStrokePainter = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     // Pencil for debug purposes
     private final Paint areaPainter = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint areaStrokePainter = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     // Bricks in a shape of a rectangle to be drawn
     private ArrayList<Rect> bricks;
+
     // For debug
     private ArrayList<Rect> screenAreasRect;
+
     // Debug purposes : true if the user wants to see the areas
     private boolean showAreas = false;
 

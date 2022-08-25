@@ -1,3 +1,10 @@
+/*
+ * Class name    : LabyrinthManager
+ *
+ * Description   : draws the labyrinth from a file and sends the screen areas filled by the
+ *                 labyrinth
+ */
+
 package com.example.labyball.controller;
 
 import android.content.Context;
@@ -7,61 +14,55 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import com.example.labyball.R;
-import com.example.labyball.modele.bean.ScreenArea;
+import com.example.labyball.bean.ScreenArea;
 import com.example.labyball.view.LabyrinthView;
 import java.util.ArrayList;
 
-/**
- * Class name    : LabyrinthManager
- *
- * Description   : draws the labyrinth from a file and sends the screen areas filled by the labyrinth
- *
- * @version 1.0
- *
- * @author Laurine Bailly
- */
 public class LabyrinthManager implements View.OnClickListener {
 
     // Length of a labyrinth brick in dpi
     public int brickLength = 0;
     public int brickHeight = 0;
+
     // A model of the labyrinth, '.' meaning space and '-' meaning brick
     public final static char[][] DATA_ENTRY = {
-            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '-', '-', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '-', '-', '.', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '-', '-', '-', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '-', '.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'-', '-', '-', '.', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'.', '.', '-', '.', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '.', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '-', '-', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '-', '.', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '.', '.', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '-', '-', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'-', '-', '-', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '-', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'-', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '-', '.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'.', '-', '.', '.', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'.', '.', '.', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '-', '-', '-', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'.', '.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'-', '.', '.', '-', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '.', '.', '.', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'-', '-', '-', '-', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-            {'.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '-', '.', '.', '.', '.', '.', '.'},
+            {'.', '-', '-', '-', '-', '-', '-', '.', '.', '.', '-', '-', '-', '-', '-'},
+            {'.', '.', '-', '.', '.', '.', '-', '.', '.', '.', '-', '.', '.', '.', '.'},
+            {'.', '-', '-', '.', '-', '.', '-', '-', '-', '-', '-', '.', '-', '-', '-'},
+            {'.', '.', '.', '.', '-', '.', '.', '.', '.', '.', '-', '.', '-', '.', '-'},
+            {'.', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '.', '-', '.', '.'},
+            {'.', '.', '.', '.', '-', '.', '-', '.', '.', '.', '.', '.', '-', '.', '.'},
+            {'.', '-', '.', '.', '-', '.', '.', '.', '-', '-', '-', '-', '-', '.', '.'},
+            {'-', '-', '-', '.', '-', '.', '-', '-', '-', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '-', '.', '-', '.', '-', '.', '-', '.', '-', '-', '-', '-', '-'},
+            {'-', '.', '.', '.', '.', '.', '-', '.', '-', '.', '.', '-', '.', '.', '.'},
+            {'-', '.', '-', '-', '-', '-', '-', '.', '-', '-', '.', '.', '.', '-', '.'},
+            {'-', '.', '-', '.', '.', '.', '.', '.', '.', '-', '-', '-', '-', '-', '.'},
+            {'-', '.', '.', '.', '-', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'-', '.', '-', '-', '-', '.', '-', '-', '-', '-', '-', '-', '-', '-', '.'},
+            {'-', '.', '.', '.', '-', '.', '.', '.', '.', '.', '.', '-', '.', '.', '.'},
+            {'-', '-', '-', '.', '-', '-', '-', '-', '-', '-', '.', '-', '.', '.', '-'},
+            {'.', '.', '-', '.', '-', '.', '.', '.', '.', '.', '.', '-', '.', '.', '-'},
+            {'-', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.', '-', '.', '.', '-'},
+            {'.', '.', '-', '.', '.', '-', '-', '-', '-', '-', '-', '-', '.', '.', '-'},
+            {'.', '-', '-', '-', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '-'},
+            {'.', '-', '.', '.', '.', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-'},
+            {'.', '.', '.', '-', '-', '-', '.', '.', '-', '-', '-', '.', '.', '.', '.'},
+            {'.', '-', '-', '-', '.', '.', '.', '.', '.', '.', '.', '.', '.', '-', '.'},
+            {'.', '.', '.', '-', '.', '-', '-', '-', '-', '.', '-', '-', '.', '-', '-'},
+            {'-', '.', '.', '-', '-', '-', '.', '-', '-', '-', '-', '.', '.', '.', '-'},
+            {'-', '.', '.', '.', '.', '.', '.', '.', '.', '-', '.', '.', '-', '.', '-'},
+            {'-', '-', '-', '-', '-', '.', '-', '.', '.', '-', '-', '-', '-', '-', '-'},
+            {'.', '.', '-', '.', '.', '.', '-', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '-', '-', '-', '-', '-', '-', '-', '-', '.', '-', '-'},
     };
     private final int NB_LINES_DATA_ENTRY = DATA_ENTRY.length;
     private final int NB_COLUMNS_DATA_ENTRY = DATA_ENTRY[0].length;
+
     // A callback
     private final LabyrinthListener labyrinthListener;
+
     // Labyrinth view
     private final LabyrinthView labyrinthView;
 
@@ -69,11 +70,12 @@ public class LabyrinthManager implements View.OnClickListener {
      * LabyrinthManager constructor
      * Inflates the view layout_labyrinth, sends the list of bricks to be drawn to LabyrinthView,
      * defines the screen Area taken by the labyrinth
-     *  @param      context context of the activity it is called from
+     * @param       context context of the activity it is called from
      * @param       rootParent parent of the layout_ball
      * @param       labyrinthListener receiver subscribing to an object from this class
      */
     public LabyrinthManager(Context context, FrameLayout rootParent, LabyrinthListener labyrinthListener) {
+
         // For debug purposes : button that allows to show the labyrinth areas calculated
         final Button bt_test;
 
@@ -90,28 +92,33 @@ public class LabyrinthManager implements View.OnClickListener {
 
         // When the labyrinth is fully loaded
         labyrinthView.addOnLayoutChangeListener((View view, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) -> {
+
             // Variables used to draw the labyrinth
             final ArrayList<Rect> bricks = new ArrayList<>();
             int posX = 0;
+
             // Lists used to define the areas of the screen taken by the labyrinth
             ArrayList<ScreenArea> labyRawAreas = new ArrayList<>();
             ArrayList<ScreenArea> labyVerticalAreas = new ArrayList<>();
             ArrayList<ScreenArea> labyAreas = new ArrayList<>();
             ArrayList<Integer> addedAreaIndexes = new ArrayList<>();
 
-            // Calculating the length and height of a brick
+            // Calculating the length and height of a brick in pixels (right and bottom are the
+            // right and bottom of labyrinthView in pixels)
             brickLength = right/NB_COLUMNS_DATA_ENTRY;
             brickHeight = bottom/NB_LINES_DATA_ENTRY;
 
             // Reading the content of dataEntry tab and building the content of bricks
-            // Bricks are tidied up vertically to earn some time in future loopings : the
-            // labyrinth will always be higher than wide
             for(int j = 0; j < NB_COLUMNS_DATA_ENTRY; j++) {
                 int posY = 0;
+
+                // At j = 0, the poX of the brick is 0 (brick of the first column)
                 if(j > 0) {
                     posX = posX + brickLength;
                 }
                 for(int k = 0; k < NB_LINES_DATA_ENTRY; k++) {
+
+                    // At k = 0, the poY of the brick is 0 (brick of the first line)
                     if(k > 0) {
                         posY = posY + brickHeight;
                     }
@@ -263,9 +270,6 @@ public class LabyrinthManager implements View.OnClickListener {
      * Interface name : LabyrinthListener
      *
      * Description    : allows to communicate the pathWidth and the borders
-     * @version 1.0
-     *
-     * @author Laurine Bailly
      */
     public interface LabyrinthListener {
         void onLabyrinthLoaded(int pathWidth, ArrayList<ScreenArea> labyrinthScreenAreas);

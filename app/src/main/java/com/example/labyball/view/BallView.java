@@ -1,3 +1,9 @@
+/*
+ * Class name    : BallView
+ *
+ * Description   : draws the ball
+ */
+
 package com.example.labyball.view;
 
 import android.content.Context;
@@ -10,24 +16,18 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import com.example.labyball.R;
 
-/**
- * Class name    : BallView
- *
- * Description   : draws the ball
- *
- * @version 1.0
- *
- * @author Laurine Bailly
- */
 public class BallView extends View {
 
     // Pencil that will allow the picture to be drawn
     private final Paint picturePainter = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     // Bitmap that will be drawn
     private Bitmap ballPicture;
+
     // X and Y position in pixels, initialized for a ball at the left top of the screen.
     private double posTop = 0;
     private double posLeft = 0;
+
     // Ball diameter
     private int ballDiameter = 60;
 

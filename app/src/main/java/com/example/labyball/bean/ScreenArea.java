@@ -1,18 +1,14 @@
-package com.example.labyball.modele.bean;
-
-import android.graphics.Rect;
-
-/**
+/*
  * Class name    : ScreenArea
  *
- * Description   : defines a screen space in a shape of a rectangle and if some sides have to be
- *                 ignored.
+ * Description   : defines a screen space in a shape of a rectangle, if some sides have to be
+ *                 ignored and if it is near an empty screen space.
  *
- * @version 1.0
- *
- * @author Laurine Bailly
  */
 
+package com.example.labyball.bean;
+
+import android.graphics.Rect;
 
 public class ScreenArea {
 
@@ -31,6 +27,7 @@ public class ScreenArea {
      * Hurdle constructor
      *
      * @param       rectangle represents a screen space
+     *
      */
     public ScreenArea(Rect rectangle) {
         this.rectangle = rectangle;
@@ -121,12 +118,13 @@ public class ScreenArea {
     }
 
     /**
+     *
      * Concatenates two hurdles with either same bottom and top coordinates or left and right ones
      *
      * @param       screenArea1 hurdle 1 to concatenate, the coordinates of the hurdle 1 will be
-     *                      used to build the new hurdle in top and left
+     *                          used to build the new hurdle in top and left
      * @param       screenArea2 hurdle 2 to concatenate, the coordinates of the hurdle 2 will be
-     *      *                      used to build the new hurdle in bottom and right
+     *                          used to build the new hurdle in bottom and right
      *
      * @return      the concatenated hurdle
      */

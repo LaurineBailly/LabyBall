@@ -1,22 +1,27 @@
+/*
+ * Class name    : MainActivity
+ *
+ * Description   : manages the lifecycles of the app
+ */
+
 package com.example.labyball;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-
 import com.example.labyball.controller.BallManager;
 import com.example.labyball.controller.LabyrinthManager;
-import com.example.labyball.modele.bean.ScreenArea;
+import com.example.labyball.bean.ScreenArea;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements LabyrinthManager.LabyrinthListener {
 
     // Manager of the ball position
     private BallManager ballController;
+
     // True is the labyrinth is already loaded
     private boolean labyrinthLoaded = false;
 
