@@ -170,12 +170,10 @@ public class BallManager implements SensorEventListener {
         boolean xDetectedHurdle = false;
         boolean yDetectedHurdle = false;
 
+        // Acceleration conversion
         // The X position axis and X acceleration axis on the device are opposite. We put the
         // acceleration axis in the same direction of the position and therefore velocity ones.
-        aX = -aX;
-
-        // Acceleration conversion
-        double xAcceleration = convertAcceleration(aX);
+        double xAcceleration = convertAcceleration(-aX);
         double yAcceleration = convertAcceleration(aY);
 
         // Position delta due to acceleration only
@@ -227,7 +225,7 @@ public class BallManager implements SensorEventListener {
                         posY = bottom;
                         yDetectedHurdle = true;
                     }
-                    else if((oldPosY <= (top - ballDiameter)) && hurdle.isCriticalTopLine()) {
+                    else if((oldPosY <= top - ballDiameter) && hurdle.isCriticalTopLine()) {
                         posY = top - ballDiameter;
                         yDetectedHurdle = true;
                     }
@@ -294,8 +292,8 @@ public class BallManager implements SensorEventListener {
      */
     public void setBallManagerSettings(ArrayList<ScreenArea> hurdles, int ballDiameter){
         this.hurdles.addAll(hurdles);
-        this.ballDiameter = (int)(ballDiameter*0.7);
-        ballView.setBallDiameter((int)(ballDiameter*0.7));
+        this.ballDiameter = (int)(ballDiameter*0.9);
+        ballView.setBallDiameter((int)(ballDiameter*0.9));
         ballView.performClick();
         ballView.setVisibility(View.VISIBLE);
     }
