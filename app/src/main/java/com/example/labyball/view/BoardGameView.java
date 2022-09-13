@@ -1,4 +1,11 @@
+/*
+ * Class name   : BoardGameView
+ *
+ * Description  : displays a ball and a labyrinth
+ */
+
 package com.example.labyball.view;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
